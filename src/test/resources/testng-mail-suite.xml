@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Mail.ru email test" verbose="1">
+
+    <test name="Mail sending test">
+        <parameter name="login" value="johnny_ring" />
+        <parameter name="password" value="WhereIsMyMoney" />
+        <parameter name="email-addressee" value="jekson797@gmail.com"/>
+        <parameter name="email-subject" value="Test"/>
+        <parameter name="email-body" value="Just want to be sure that test is working"/>
+        <classes>
+            <class name="by.epamlab.webdriver_advanced.test.EmailLoginTest" />
+            <class name="by.epamlab.webdriver_advanced.test.EmailSaveMailTest"/>
+            <class name="by.epamlab.webdriver_advanced.test.EmailDraftContentTest"/>
+            <class name="by.epamlab.webdriver_advanced.test.EmailSendDraftMailTest" />
+        </classes>
+    </test>
+</suite>
