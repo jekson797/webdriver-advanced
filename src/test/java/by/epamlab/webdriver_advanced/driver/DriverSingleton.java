@@ -2,9 +2,7 @@ package by.epamlab.webdriver_advanced.driver;
 
 import by.epamlab.webdriver_advanced.service.ConfigReader;
 import by.epamlab.webdriver_advanced.service.Constants;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -34,34 +32,24 @@ public class DriverSingleton {
     }
 
     private static WebDriver setDriver() throws MalformedURLException {
+        DesiredCapabilities capabilities;
         switch (System.getProperty("browser", "chrome")){
             case "firefox": {
-                driver = createFirefoxDriver();
+                capabilities = DesiredCapabilities.firefox();
                 break;
             }
             case "chrome": {
-                driver = createChromeDriver();
+                capabilities = DesiredCapabilities.chrome();
                 break;
             }
             default: {
                 throw new AssertionError("Browser is not correct");
             }
         }
+        driver = new RemoteWebDriver(new URL(GRID_URL), capabilities);
         driver.manage().timeouts().implicitlyWait(IMPLICIT_TIMEOUT, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         return getDriver();
-    }
-
-    private static WebDriver createFirefoxDriver() throws MalformedURLException {
-        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-        driver = new RemoteWebDriver(new URL(GRID_URL), capabilities);
-        return driver;
-    }
-
-    private static WebDriver createChromeDriver() throws MalformedURLException {
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        driver = new RemoteWebDriver(new URL(GRID_URL), capabilities);
-        return driver;
     }
 
     public static void closeDriver() {
