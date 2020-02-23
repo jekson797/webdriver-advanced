@@ -1,4 +1,4 @@
-package by.epamlab.webdriver_advanced.test;
+package by.epamlab.webdriver_advanced.test_condition;
 
 import by.epamlab.webdriver_advanced.driver.DriverSingleton;
 import by.epamlab.webdriver_advanced.utils.TestListener;

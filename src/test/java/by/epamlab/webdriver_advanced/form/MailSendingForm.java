@@ -50,8 +50,9 @@ public class MailSendingForm extends AbstractPage {
         return this;
     }
 
-    public void pressCloseBtn() {
+    public MailSendingForm pressCloseBtn() {
         pressEnterOnElement(closeBtn);
+        return this;
     }
 
     public String getAddresseeFieldValue() {

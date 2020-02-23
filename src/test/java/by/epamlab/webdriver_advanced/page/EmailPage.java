@@ -18,6 +18,9 @@ public class EmailPage extends AbstractPage {
     @FindBy(xpath = "//a[@href='/sent/']")
     private WebElement sentBtn;
 
+    @FindBy(xpath = "//a[@href='/trash/']")
+    private WebElement trashBtn;
+
     @FindBy(xpath = "//a[contains(@href, 'logout')]")
     private WebElement logoutBtn;
 
@@ -41,6 +44,11 @@ public class EmailPage extends AbstractPage {
         return new EmailSentPage();
     }
 
+    public EmailTrashPage pressTrashBtn() {
+        clickElementWithJs(trashBtn);
+        return new EmailTrashPage();
+    }
+
     public MailSendingForm pressWriteLetterBtn() {
         clickElement(writeLetterBtn);
         return new MailSendingForm();
@@ -48,5 +56,9 @@ public class EmailPage extends AbstractPage {
 
     public void pressLogout() {
         clickElement(logoutBtn);
+    }
+
+    protected WebElement getTrashBtnElement() {
+        return trashBtn;
     }
 }

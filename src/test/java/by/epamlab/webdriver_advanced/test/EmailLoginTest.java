@@ -4,6 +4,7 @@ import by.epamlab.webdriver_advanced.page.EmailPage;
 import by.epamlab.webdriver_advanced.page.MailRuHomePage;
 import by.epamlab.webdriver_advanced.service.ConfigReader;
 import by.epamlab.webdriver_advanced.service.Constants;
+import by.epamlab.webdriver_advanced.test_condition.CommonConditions;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;

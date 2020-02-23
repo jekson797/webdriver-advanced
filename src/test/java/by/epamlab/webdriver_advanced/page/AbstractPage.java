@@ -29,6 +29,12 @@ public abstract class AbstractPage {
         return driver.getCurrentUrl();
     }
 
+    protected void dragElementToAnotherElement(WebElement draggableElement, WebElement droppableElement) {
+        highlightElement(draggableElement);
+        action.clickAndHold(draggableElement).moveToElement(droppableElement).release().perform();
+        unHighlightElement(draggableElement);
+    }
+
     protected void waitUntilPageIsLoadedWithJs() {
         wait.until(webDriver -> js.executeScript("return document.readyState").equals("complete"));
     }
@@ -58,8 +64,16 @@ public abstract class AbstractPage {
         unHighlightElement(element);
     }
 
+    protected void hoverAndClick(WebElement element) {
+        highlightElement(element);
+        action.moveToElement(element).click(element).perform();
+        unHighlightElement(element);
+    }
+
     protected void clickElementAction(WebElement element) {
+        highlightElement(element);
         action.click(element).build().perform();
+        unHighlightElement(element);
     }
 
     protected void clickElementWithJs(WebElement element) {
@@ -70,17 +84,23 @@ public abstract class AbstractPage {
     }
 
     protected void pressEnterOnElement(WebElement element) {
+        highlightElement(element);
         element.sendKeys(Keys.ENTER);
+        unHighlightElement(element);
     }
 
     protected void setValue(WebElement element, String text) {
+        highlightElement(element);
         waitUntilElementToBeClickable(element);
         element.sendKeys(text);
+        unHighlightElement(element);
     }
 
     protected void setValueAction(WebElement element, String text) {
         waitUntilElementToBeClickable(element);
-        action.sendKeys(element, text);
+        highlightElement(element);
+        action.sendKeys(element, text).perform();
+        unHighlightElement(element);
     }
 
     protected String getElementText(WebElement element) {

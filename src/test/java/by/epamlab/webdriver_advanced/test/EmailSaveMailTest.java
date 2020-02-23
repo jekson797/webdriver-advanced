@@ -3,6 +3,7 @@ package by.epamlab.webdriver_advanced.test;
 import by.epamlab.webdriver_advanced.page.EmailDraftPage;
 import by.epamlab.webdriver_advanced.page.EmailPage;
 import by.epamlab.webdriver_advanced.form.MailSendingForm;
+import by.epamlab.webdriver_advanced.test_condition.CommonConditions;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -13,9 +14,10 @@ public class EmailSaveMailTest extends CommonConditions {
     @Test(description = "Save mail as a draft", groups = {"save-mail"}, dependsOnGroups = {"login"})
     public void testSavingMailAsDraft(String addressee, String subject, String body) {
         EmailDraftPage draftPage = new EmailDraftPage();
-        int draftMailsBeforeCreatingNewOne = draftPage.pressDraftBtn().getMailsAmountInFolder();
+        int draftMailsBeforeCreatingNewOne = draftPage.pressDraftBtn().getDraftMailItems().size();
         writeMail(addressee, subject, body).saveMailAsDraft();
-        int draftMailsAfterCreatingNewOne = draftPage.pressDraftBtn().getMailsAmountInFolder();
+        draftPage.pressDraftBtn().refreshPage();
+        int draftMailsAfterCreatingNewOne = draftPage.getDraftMailItems().size();
         Assert.assertTrue(draftMailsAfterCreatingNewOne > draftMailsBeforeCreatingNewOne);
     }
 

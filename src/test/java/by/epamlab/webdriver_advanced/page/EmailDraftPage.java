@@ -9,17 +9,21 @@ import java.util.List;
 public class EmailDraftPage extends EmailPage {
 
     @FindBy(xpath = "//*[@class='stop-animate']/ancestor::a[contains(@href, '/drafts/')]")
-    private List<WebElement> mailsList;
+    private List<WebElement> draftMailItems;
 
-    public int getMailsAmountInFolder() {
-        return mailsList.size();
+    public List<WebElement> getDraftMailItems() {
+        return draftMailItems;
     }
 
-    public MailSendingForm openLastAddedMail() {
-        if(mailsList.isEmpty()) {
+    public MailSendingForm pressOnFirstMailItem() {
+        clickElement(getFirstMailItem());
+        return new MailSendingForm();
+    }
+
+    private WebElement getFirstMailItem() {
+        if(draftMailItems.isEmpty()) {
             throw new AssertionError("Draft folder is empty");
         }
-        clickElement(mailsList.get(0));
-        return new MailSendingForm();
+        return draftMailItems.get(0);
     }
 }

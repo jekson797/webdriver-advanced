@@ -2,6 +2,7 @@ package by.epamlab.webdriver_advanced.test;
 
 import by.epamlab.webdriver_advanced.page.EmailDraftPage;
 import by.epamlab.webdriver_advanced.form.MailSendingForm;
+import by.epamlab.webdriver_advanced.test_condition.CommonConditions;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -29,7 +30,7 @@ public class EmailDraftContentTest extends CommonConditions {
     }
 
     private Map<String, String> getDraftMailContent() {
-        MailSendingForm sendingForm = new EmailDraftPage().openLastAddedMail();
+        MailSendingForm sendingForm = new EmailDraftPage().pressOnFirstMailItem();
         String addressee = sendingForm.getAddresseeFieldValue();
         String subject = sendingForm.getSubjectValue();
         String body = cutMailSignature(sendingForm.getMessageFieldValue());
