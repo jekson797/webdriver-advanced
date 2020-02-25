@@ -31,7 +31,7 @@ public abstract class AbstractPage {
 
     protected void dragElementToAnotherElement(WebElement draggableElement, WebElement droppableElement) {
         highlightElement(draggableElement);
-        action.clickAndHold(draggableElement).moveToElement(droppableElement).release().perform();
+        action.dragAndDrop(draggableElement, droppableElement).perform();
         unHighlightElement(draggableElement);
     }
 
